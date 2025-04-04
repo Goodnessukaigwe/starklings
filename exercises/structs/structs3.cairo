@@ -12,8 +12,8 @@ struct Package {
 
 trait PackageTrait {
     fn new(sender_country: felt252, recipient_country: felt252, weight_in_grams: usize) -> Package;
-    fn is_international(ref self: Package) -> bool//???;
-    fn get_fees(ref self: Package, cents_per_gram: usize) -> usize //???;
+    fn is_international(ref self: Package) -> bool;//???;
+    fn get_fees(ref self: Package, cents_per_gram: usize) -> usize; //???;
 }
 impl PackageImpl of PackageTrait {
     fn new(sender_country: felt252, recipient_country: felt252, weight_in_grams: usize) -> Package {
