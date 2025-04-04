@@ -2,7 +2,6 @@
 // This is a bit challenging for Joe and Jill, Liz prepared an outline
 // for how contract should work, can you help Jill and Joe write it?
 
-// I AM NOT DONE
 
 use starknet::ContractAddress;
 
@@ -24,6 +23,7 @@ mod LizInventory {
     struct Storage {
         contract_owner: ContractAddress,
         // TODO: add storage inventory, that maps product (felt252) to stock quantity (u32)
+        inventory: Map<felt252, u32>
     }
 
     #[constructor]
@@ -34,21 +34,35 @@ mod LizInventory {
 
     #[abi(embed_v0)]
     impl LizInventoryImpl of super::ILizInventory<ContractState> {
-        fn add_stock(ref self: ContractState, ) {
+        fn add_stock(ref self: ContractState, product: felt252, new_stock: u32 ) {
+            let call = get_caller_address();
+
+            assert(caller == self.contract_owner.read(), 'caller not owner');
+
+            let current_stock = self.inventory.read(product);
+
+            self.inventory.write(product, current_stock + new_stock);
             // TODO:
             // * takes product and new_stock
+            
             // * adds new_stock to stock in inventory
             // * only owner can call this
+
         }
 
-        fn purchase(ref self: ContractState, ) {
+        fn purchase(ref self: ContractState, product: felt252, quantity: u32) {
+
+            let current_stock = self.invevntory.read(product);
+            assert(current_stock >= quantity, 'Insufficent stock');
+            self.inventory.write(product, current_stock - quantity);
             // TODO:
             // * takes product and quantity
             // * subtracts quantity from stock in inventory
             // * anybody can call this
         }
 
-        fn get_stock(self: @ContractState, ) -> u32 {
+        fn get_stock(self: @ContractState,product: felt252 ) -> u32 {
+            self.inventory.read(product);
             // TODO:
             // * takes product
             // * returns product stock in inventory

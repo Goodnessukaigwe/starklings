@@ -5,7 +5,7 @@
 // Using the methods set and get from the Felt252DictTrait, implement the required functions to interact with the team
 // Make me compile and pass the test!
 
-// I AM NOT DONE
+
 
 #[derive(Destruct)]
 struct Team {
@@ -13,26 +13,32 @@ struct Team {
     players_count: usize
 }
 
+use core::dict::Felt252Dict;
 #[generate_trait]
 impl TeamImpl of TeamTrait {
     fn new() -> Team {
-        //TODO : initialize empty team with 0 player
+        Team {
+            level: Default::default(),
+            players_count: 0
+        }
     }
 
     fn get_level(ref self: Team, name: felt252) -> usize {
-        //TODO 
+        self.level.get(name) 
     }
 
     fn add_player(ref self: Team, name: felt252, level: usize) -> () {
-        //TODO
+        self.level.insert(name, level);
+        self.players_count += 1;//TODO
     }
 
     fn level_up(ref self: Team, name: felt252) {
-        //TODO
+        let current = self.level.get(name);
+        self.level.insert(name, current + 1);//TODO
     }
 
     fn players_count(self: @Team) -> usize {
-        //TODO
+        return *self.players_count;
     }
 }
 

@@ -1,10 +1,14 @@
-// I AM NOT DONE
 
 use debug::PrintTrait;
 
 
 #[derive(Copy, Drop)]
-enum Message { // TODO: define the different variants used below
+enum Message {
+    Quit,
+    Echo:felt252,
+    Move:(u128,u128),
+    ChangeColor:(u128,u128,u128),
+    // TODO: define the different variants used below
 }
 
 

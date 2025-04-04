@@ -1,11 +1,14 @@
 // Make the tests pass.
 
-// I AM NOT DONE
-
 fn bigger(a: usize, b: usize) -> usize { // Complete this function to return the bigger number!
-// Do not use:
-// - another function call
-// - additional variables
+    // Do not use:
+    // - another function call
+    // - additional variables
+    if a > b {
+        return a;
+    } else {
+        return b;
+    }
 }
 
 // Don't mind this for now :)

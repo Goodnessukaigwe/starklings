@@ -1,9 +1,14 @@
 // Address all the TODOs to make the tests pass!
 
-// I AM NOT DONE
+
 
 #[derive(Drop, Copy)]
-enum Message { // TODO: implement the message variant types based on their usage below
+enum Message { 
+    Quit,
+    Echo:felt252,
+    Move:Point,
+    ChangeColor:(u8,u8,u8)
+    // TODO: implement the message variant types based on their usage below
 }
 
 #[derive(Drop, Copy)]
@@ -47,7 +52,15 @@ impl StateImpl of StateTrait {
 
     fn process(
         ref self: State, message: Message
-    ) { // TODO: create a match expression to process the different message variants
+    ) { 
+        match message {
+            Message::ChangeColor(new_color) => self.change_color(new_color),
+            Message::Quit => self.quit(),
+            Message::Echo(s) => self.echo(s),
+            Message::Move(p) => self.move_position(p),
+        }       
+        
+        // TODO: create a match expression to process the different message variants
     }
 }
 
