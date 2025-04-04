@@ -14,7 +14,7 @@ fn maybe_icecream(
 if time_of_day > 23 {
     return Option::None;
 }
-if time_of_day>=9 &&time_of_day <= 22 {
+if time_of_day < 22 {
     return Option::Some(5);
 } else {
     return Option::Some(0);

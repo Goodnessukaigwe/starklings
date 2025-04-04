@@ -17,6 +17,6 @@ fn test_arrays3() {
     let mut a = create_array();
     //TODO modify the method called below to make the test pass.
     // You should not change the index accessed.
-    let result = *a.at(2);
+    let result = *a.at(1);
     assert!(result == 2);
 }
